@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseOperations", "DbTableComparerApi\DatabaseOperations.csproj", "{C1D5850E-4B2F-46BE-93F3-525E1C4089E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseOperations", "DatabaseOperations\DatabaseOperations.csproj", "{C1D5850E-4B2F-46BE-93F3-525E1C4089E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
