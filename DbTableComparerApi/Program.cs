@@ -7,6 +7,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<DAContext>();
 builder.Services.AddSingleton<TableCompareService>();
+builder.Services.AddSingleton <GenerateDDLService>();
 
 
 var app = builder.Build();
