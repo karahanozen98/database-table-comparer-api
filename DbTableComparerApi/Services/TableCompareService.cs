@@ -1,7 +1,7 @@
-﻿using DbTableComparerApi.Common;
-using DbTableComparerApi.DBContext;
+﻿using DatabaseOperations.Common;
+using DatabaseOperations.DBContext;
 
-namespace DbTableComparerApi.Services
+namespace DatabaseOperations.Services
 {
     public class TableCompareService
     {

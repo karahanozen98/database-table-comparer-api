@@ -1,4 +1,4 @@
-﻿namespace DbTableComparerApi.Services
+﻿namespace DatabaseOperations.Services
 {
     public class CompareQuery
     {

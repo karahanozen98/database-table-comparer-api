@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DbTableComparerApi.Common
+namespace DatabaseOperations.Common
 {
     public class TableInfoDto
     {

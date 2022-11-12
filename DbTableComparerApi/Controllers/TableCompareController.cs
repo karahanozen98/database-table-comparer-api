@@ -1,7 +1,7 @@
-﻿using DbTableComparerApi.Services;
+﻿using DatabaseOperations.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DbTableComparerApi.Controllers
+namespace DatabaseOperations.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]

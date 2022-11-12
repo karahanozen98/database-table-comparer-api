@@ -1,5 +1,5 @@
-using DbTableComparerApi.DBContext;
-using DbTableComparerApi.Services;
+using DatabaseOperations.DBContext;
+using DatabaseOperations.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();

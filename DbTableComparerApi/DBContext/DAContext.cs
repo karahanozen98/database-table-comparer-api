@@ -1,9 +1,9 @@
 ﻿using Dapper;
-using DbTableComparerApi.Common;
+using DatabaseOperations.Common;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;
 
-namespace DbTableComparerApi.DBContext
+namespace DatabaseOperations.DBContext
 {
     public class DAContext
     {
