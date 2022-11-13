@@ -1,22 +1,22 @@
 ﻿using DatabaseOperations.Common;
 using DatabaseOperations.DBContext;
 
-namespace DatabaseOperations.Services
+namespace DatabaseOperations.Services.TableCompare
 {
     public class TableCompareService
     {
-        public DAContext context { get; }
+        private readonly DAContext _context;
 
         public TableCompareService(DAContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
-        public CompareResponse Compare(CompareQuery query)
+        public async Task<CompareResponse> Compare(CompareQuery query)
         {
             var result = new CompareResponse();
-            var firstTable = this.TeadTableInfo(query.First);
-            var secondTable = this.TeadTableInfo(query.Second);
+            var firstTable = await this.TeadTableInfo(query.First);
+            var secondTable = await this.TeadTableInfo(query.Second);
             result.FirstTableColumns = firstTable.Select(col => col.Name).ToList();
             result.SecondTableColumns = secondTable.Select(col => col.Name).ToList();
             var compareProperties = query.GetType().GetProperties()
@@ -64,12 +64,12 @@ namespace DatabaseOperations.Services
             return Convert.ToString(value);
         }
 
-        private IEnumerable<TableInfoDto> TeadTableInfo(string tableName)
+        private async Task<IEnumerable<TableInfoDto>> TeadTableInfo(string tableName)
         {
             var sql = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @TableName";
             var parameters = new { TableName = tableName };
 
-            return this.context.Query<TableInfoDto>(sql, parameters);
+            return await this._context.QueryAsync<TableInfoDto>(sql, parameters);
         }
     }
 }

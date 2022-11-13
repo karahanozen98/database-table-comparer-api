@@ -1,5 +1,6 @@
 using DatabaseOperations.DBContext;
-using DatabaseOperations.Services;
+using DatabaseOperations.Services.GenerateDDL;
+using DatabaseOperations.Services.TableCompare;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();

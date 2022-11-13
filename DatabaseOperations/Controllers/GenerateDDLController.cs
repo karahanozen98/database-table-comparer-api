@@ -1,4 +1,4 @@
-﻿using DatabaseOperations.Services;
+﻿using DatabaseOperations.Services.GenerateDDL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatabaseOperations.Controllers
@@ -13,9 +13,9 @@ namespace DatabaseOperations.Controllers
         }
 
         [HttpGet("{objectName}")]
-        public string GenerateDDL(string objectName)
+        public async Task<string> GenerateDDL(string objectName)
         {
-            return this.generateDDLService.GenerateDDL(objectName);
+            return await this.generateDDLService.GenerateDDL(objectName);
         }
     }
 }

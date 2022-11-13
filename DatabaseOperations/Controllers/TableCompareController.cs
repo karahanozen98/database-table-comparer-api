@@ -1,4 +1,4 @@
-﻿using DatabaseOperations.Services;
+﻿using DatabaseOperations.Services.TableCompare;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatabaseOperations.Controllers
@@ -17,9 +17,9 @@ namespace DatabaseOperations.Controllers
 
 
         [HttpGet("compare")]
-        public CompareResponse Compare([FromQuery] CompareQuery query)
+        public async Task<CompareResponse> Compare([FromQuery] CompareQuery query)
         {
-            return this._tableCompareService.Compare(query);
+            return await this._tableCompareService.Compare(query);
         }
 
     }

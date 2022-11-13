@@ -22,10 +22,16 @@ namespace DatabaseOperations.DBContext
                                   .Any(attr => attr.Name == columnName))));
         }
 
-        public IEnumerable<T> Query<T>(string sql, object parameters)
+        public async Task<IEnumerable<T>> QueryAsync<T>(string sql, object parameters = null)
         {
             using var connection = new SqlConnection(this.connectionString);
-            return connection.Query<T>(sql, parameters);
+            return await connection.QueryAsync<T>(sql, parameters);
+        }
+
+        public async Task<T> QueryFirstOrDefaultAsync<T>(string sql, object parameters = null)
+        {
+            using var connection = new SqlConnection(this.connectionString);
+            return await connection.QueryFirstOrDefaultAsync<T>(sql, parameters);
         }
     }
 }

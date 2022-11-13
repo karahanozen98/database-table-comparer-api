@@ -1,24 +1,5 @@
-﻿namespace DatabaseOperations.Services
+﻿namespace DatabaseOperations.Services.TableCompare
 {
-    public class CompareResponse
-    {
-        public CompareResponse()
-        {
-            this.ColumnsWithSameName = new List<CompareColumn>();
-            this.FirstTableColumns = new List<string>();
-            this.SecondTableColumns = new List<string>();
-        }
-
-        // Columns first table have
-        public List<string> FirstTableColumns { get; set; }
-
-        // Columns second table table have
-        public List<string> SecondTableColumns { get; set; }
-
-        // Columns sharing same name with other compared properties like DataType, IsNullable etc.
-        public List<CompareColumn> ColumnsWithSameName { get; set; }
-    }
-
     public class CompareColumn
     {
         public CompareColumn(string columnName)
