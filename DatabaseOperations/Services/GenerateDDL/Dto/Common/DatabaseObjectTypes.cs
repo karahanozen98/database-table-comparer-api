@@ -4,6 +4,8 @@
     {
         public const string Table = "USER_TABLE";
 
+        public const string View = "VIEW";
+
         public const string StoredProcedure = "SQL_STORED_PROCEDURE";
 
         public const string TableValuedFunc = "SQL_TABLE_VALUED_FUNCTION";

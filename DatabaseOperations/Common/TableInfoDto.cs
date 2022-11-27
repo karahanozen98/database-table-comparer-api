@@ -2,7 +2,7 @@
 
 namespace DatabaseOperations.Common
 {
-    public class TableInfoDto
+    public class TableInfoDto : IQueryResult
     {
         [Column("COLUMN_NAME")]
         public string Name { get; set; }
@@ -14,18 +14,18 @@ namespace DatabaseOperations.Common
         public string IsNullable { get; set; }
 
         [Column("CHARACTER_MAXIMUM_LENGTH")]
-        public int CharMaxLength { get; set; }
+        public int? CharMaxLength { get; set; }
 
         [Column("ORDINAL_POSITION")]
         public int OrdinalPosition { get; set; }
 
         [Column("COLUMN_DEFAULT")]
-        public string ColumnDefault { get; set; }
+        public string? ColumnDefault { get; set; }
 
         [Column("CHARACTER_OCTET_LENGTH")]
-        public int OctetLength { get; set; }
+        public int? OctetLength { get; set; }
 
         [Column("NUMERIC_PRECISION")]
-        public int NumericPrecision { get; set; }
+        public int? NumericPrecision { get; set; }
     }
 }
