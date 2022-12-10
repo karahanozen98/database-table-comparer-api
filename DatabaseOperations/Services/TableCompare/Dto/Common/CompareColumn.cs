@@ -6,14 +6,14 @@
         {
             this.ColumnName = columnName;
             this.MatchingProperties = new List<ColumnProperty>();
-            this.UnMatchingProperties = new List<UnMatchedColumnProperty>();
+            this.UnmatchingProperties = new List<UnMatchedColumnProperty>();
         }
 
         public string ColumnName { get; set; }
 
         public List<ColumnProperty> MatchingProperties { get; set; }
 
-        public List<UnMatchedColumnProperty> UnMatchingProperties { get; set; }
+        public List<UnMatchedColumnProperty> UnmatchingProperties { get; set; }
     }
 
     public class ColumnProperty

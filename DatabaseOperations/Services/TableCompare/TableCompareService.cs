@@ -15,17 +15,17 @@ namespace DatabaseOperations.Services.TableCompare
         public async Task<CompareResponse> Compare(CompareQuery query)
         {
             var result = new CompareResponse();
-            var firstTable = await this.TeadTableInfo(query.First);
-            var secondTable = await this.TeadTableInfo(query.Second);
-            result.FirstTableColumns = firstTable.Select(col => col.Name).ToList();
-            result.SecondTableColumns = secondTable.Select(col => col.Name).ToList();
+            var firstTableColumns = await this.ReadTableColumnInfo(query.First);
+            var secondTableColumns = await this.ReadTableColumnInfo(query.Second);
+            result.FirstTableColumns = firstTableColumns.Select(col => col.Name).ToList();
+            result.SecondTableColumns = secondTableColumns.Select(col => col.Name).ToList();
             var compareProperties = query.GetType().GetProperties()
                 .Where(p => p.GetValue(query)?.ToString() == "True")
                 .Select(p => p.Name.Replace("Compare", string.Empty));
 
-            foreach (var column in firstTable)
+            foreach (var column in firstTableColumns)
             {
-                var match = secondTable.FirstOrDefault(col => col.Name == column.Name);
+                var match = secondTableColumns.FirstOrDefault(col => col.Name == column.Name);
 
                 if (match != null)
                 {
@@ -33,17 +33,20 @@ namespace DatabaseOperations.Services.TableCompare
 
                     foreach (var property in compareProperties)
                     {
-                        var value = column.GetType().GetProperty(property)?.GetValue(column);
-                        var secondValue = match.GetType().GetProperty(property)?.GetValue(match);
+                        var firstPropertyValue = column.GetType().GetProperty(property)?.GetValue(column);
+                        var secondPropertyValue = match.GetType().GetProperty(property)?.GetValue(match);
 
-                        if (Object.Equals(value, secondValue))
+                        if (Object.Equals(firstPropertyValue, secondPropertyValue))
                         {
-                            compareColumn.MatchingProperties.Add(new ColumnProperty(property, this.ToSafeString(value)));
+                            compareColumn.MatchingProperties.Add(
+                                new ColumnProperty(property, this.ToSafeString(firstPropertyValue)));
                         }
                         else
                         {
-                            compareColumn.UnMatchingProperties.Add(
-                                new UnMatchedColumnProperty(property, this.ToSafeString(value), this.ToSafeString(secondValue)));
+                            compareColumn.UnmatchingProperties.Add(
+                                new UnMatchedColumnProperty(property,
+                                this.ToSafeString(firstPropertyValue),
+                                this.ToSafeString(secondPropertyValue)));
                         }
                     }
 
@@ -64,7 +67,7 @@ namespace DatabaseOperations.Services.TableCompare
             return Convert.ToString(value);
         }
 
-        private async Task<IEnumerable<TableInfoDto>> TeadTableInfo(string tableName)
+        private async Task<IEnumerable<TableInfoDto>> ReadTableColumnInfo(string tableName)
         {
             var sql = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @TableName";
             var parameters = new { TableName = tableName };
